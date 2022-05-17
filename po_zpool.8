@@ -1,0 +1,76 @@
+.\"
+.\"Copyright (c) 2022 Sean Davies <sean@city17.org>
+.\"
+.\"Permission to use, copy, modify, and distribute this software for any
+.\"purpose with or without fee is hereby granted, provided that the above
+.\"copyright notice and this permission notice appear in all copies.
+.\"
+.\"THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+.\"WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+.\"MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+.\"ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+.\"WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+.\"ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+.\"OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+.\"
+.Dd $Mdocdate: May 4 2022 $
+.Dt PO_ZPOOL 8
+.Os
+.Sh NAME
+.Nm po_zpool
+.Nd send pushover notifications for zpool health
+.Sh SYNOPSIS
+.Nm
+.Op Fl d
+.Op Fl t Ar title
+.Sh DESCRIPTION
+.Nm
+is a utility that will send a pushover notification if
+.Xr zpool-status 8
+shows that any pool is in a state other than healthy, using the output of this
+command as the message body.
+.Pp
+The
+.Va po_token
+and
+.Va po_user
+variables must be defined within the script before use and should contain the
+.Va USER_KEY
+and
+.Va API_TOKEN
+for an application registered with
+.Lk https://pushover.net .
+.Pp
+The options are as follows:
+.Bl -tag -width Ds
+.It Fl d
+Debug mode.
+Always send a pushover notification.
+.It Fl t Ar title
+Set the message's title.
+If unset,
+.Xr hostname 1
+will be used.
+.El
+.Sh EXIT STATUS
+.Ex -std
+.Sh EXAMPLES
+The following is an example
+.Xr crontab 5
+entry to run every 5 minutes.
+.Bd -literal -offset indent
+*/5 * * * * /usr/home/charlie/bin/po_zpool.sh
+.Ed
+.Sh SEE ALSO
+.Xr curl 1 ,
+.Xr hostname 1 ,
+.Xr crontab 5 ,
+.Xr cron 8 ,
+.Xr zpool-status 8
+.Pp
+.Lk https://pushover.net/api
+.Sh AUTHORS
+.An Sean Davies Aq Mt sean@city17.org
+.Sh CAVEATS
+Depends on
+.Xr curl 1 .
