@@ -23,9 +23,9 @@ The
 and
 *po\_user*
 variables must be defined within the script before use and should contain the
-*USER\_KEY*
-and
 *API\_TOKEN*
+and
+*USER\_KEY*
 for an application registered with
 [https://pushover.net](https://pushover.net).
 
