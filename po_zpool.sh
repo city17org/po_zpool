@@ -43,7 +43,7 @@ if ! command -v curl >/dev/null; then
 fi
 
 if [ -z "${po_token}" ] || [ -z "${po_user}" ]; then
-	die "${0##*/}: pushover varibles not defined"
+	die "${0##*/}: pushover variables not defined"
 fi
 
 zpool_status=$(zpool status -x 2>&1)
